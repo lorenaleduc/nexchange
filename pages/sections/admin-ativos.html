@@ -1,0 +1,115 @@
+<section
+  class="dashboard-section admin-section hidden"
+  id="admin-assets"
+>
+  <div class="section-header">
+    <div>
+      <span class="section-label">
+        ADMINISTRAÇÃO
+      </span>
+
+      <h2>
+        Gerenciar ativos
+      </h2>
+
+      <p>
+        Cadastre, edite e remova os ativos disponíveis no sistema.
+      </p>
+    </div>
+  </div>
+
+  <div class="admin-layout">
+    <form id="asset-form" class="panel-form">
+      <input
+        type="hidden"
+        id="asset-original-symbol"
+      >
+
+      <div class="form-group">
+        <label for="asset-name">
+          Nome do ativo
+        </label>
+
+        <input
+          id="asset-name"
+          type="text"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="asset-symbol">
+          Código
+        </label>
+
+        <input
+          id="asset-symbol"
+          type="text"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="asset-kind">
+          Tipo
+        </label>
+
+        <input
+          id="asset-kind"
+          type="text"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="asset-price">
+          Preço
+        </label>
+
+        <input
+          id="asset-price"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="asset-change">
+          Variação
+        </label>
+
+        <input
+          id="asset-change"
+          type="text"
+          placeholder="+0,00%"
+          required
+        >
+      </div>
+
+      <div class="form-actions">
+        <button
+          id="asset-submit"
+          class="primary-button"
+          type="submit"
+        >
+          Cadastrar ativo
+        </button>
+
+        <button
+          id="asset-cancel"
+          class="secondary-button hidden"
+          type="button"
+        >
+          Cancelar edição
+        </button>
+      </div>
+    </form>
+
+    <div
+      class="admin-assets-list"
+      id="admin-assets-list"
+    ></div>
+  </div>
+</section>
