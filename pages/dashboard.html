@@ -119,9 +119,11 @@
 
         <article class="summary-card">
           <span>Regras</span>
+
           <strong id="regras-resumo">
             Nenhuma regra ativa
           </strong>
+
           <small>Regras de investimento</small>
         </article>
 
@@ -129,17 +131,20 @@
           <span>Automação</span>
 
           <div class="automation-control">
+
             <label class="switch">
               <input
                 id="automacao"
                 type="checkbox"
               >
+
               <span class="slider"></span>
             </label>
 
             <strong id="automacao-status">
               Desativada
             </strong>
+
           </div>
 
           <small>Simulação automática</small>
@@ -147,9 +152,13 @@
 
       </section>
 
-      <section class="dashboard-section" id="mercado">
+      <section
+        class="dashboard-section"
+        id="mercado"
+      >
 
         <div class="section-header">
+
           <div>
             <span class="section-label">
               MERCADO
@@ -162,9 +171,13 @@
               simulação.
             </p>
           </div>
+
         </div>
 
-        <div class="assets-grid" id="ativos"></div>
+        <div
+          class="assets-grid"
+          id="ativos"
+        ></div>
 
       </section>
 
@@ -174,6 +187,7 @@
       >
 
         <div class="section-header">
+
           <div>
             <span class="section-label">
               ADMINISTRAÇÃO
@@ -186,6 +200,7 @@
               disponíveis no sistema.
             </p>
           </div>
+
         </div>
 
         <div class="admin-assets-layout">
@@ -201,6 +216,7 @@
             >
 
             <div class="form-group">
+
               <label for="asset-name">
                 Nome
               </label>
@@ -211,9 +227,11 @@
                 placeholder="Ex.: Petrobras PN"
                 required
               >
+
             </div>
 
             <div class="form-group">
+
               <label for="asset-symbol">
                 Símbolo
               </label>
@@ -224,9 +242,11 @@
                 placeholder="Ex.: PETR4"
                 required
               >
+
             </div>
 
             <div class="form-group">
+
               <label for="asset-kind">
                 Tipo
               </label>
@@ -237,9 +257,11 @@
                 placeholder="Ex.: Ação"
                 required
               >
+
             </div>
 
             <div class="form-group">
+
               <label for="asset-price">
                 Preço
               </label>
@@ -252,9 +274,11 @@
                 placeholder="0,00"
                 required
               >
+
             </div>
 
             <div class="form-group">
+
               <label for="asset-change">
                 Variação
               </label>
@@ -265,6 +289,7 @@
                 placeholder="Ex.: +1,25%"
                 required
               >
+
             </div>
 
             <div class="form-actions">
@@ -304,7 +329,9 @@
       >
 
         <div class="section-header">
+
           <div>
+
             <span class="section-label">
               AUTOMAÇÃO
             </span>
@@ -315,11 +342,13 @@
               Configure condições para acompanhar
               oportunidades de investimento.
             </p>
+
           </div>
 
           <span id="contador-regras">
             0 regra(s)
           </span>
+
         </div>
 
         <div class="rules-layout">
@@ -329,7 +358,13 @@
             class="panel-form"
           >
 
+            <input
+              type="hidden"
+              id="regra-id"
+            >
+
             <div class="form-group">
+
               <label for="ativo">
                 Ativo
               </label>
@@ -340,9 +375,11 @@
               ></select>
 
               <small id="preco-atual"></small>
+
             </div>
 
             <div class="form-group">
+
               <label for="preco-alvo">
                 Preço-alvo
               </label>
@@ -355,9 +392,11 @@
                 placeholder="0,00"
                 required
               >
+
             </div>
 
             <div class="form-group">
+
               <label for="valor">
                 Valor limite
               </label>
@@ -370,23 +409,39 @@
                 placeholder="0,00"
                 required
               >
+
             </div>
 
             <label class="checkbox-field">
+
               <input
                 id="notificar"
                 type="checkbox"
               >
 
               Receber notificação
+
             </label>
 
-            <button
-              class="primary-button"
-              type="submit"
-            >
-              Criar regra
-            </button>
+            <div class="form-actions">
+
+              <button
+                id="regra-submit"
+                class="primary-button"
+                type="submit"
+              >
+                Criar regra
+              </button>
+
+              <button
+                id="regra-cancelar"
+                class="secondary-button hidden"
+                type="button"
+              >
+                Cancelar edição
+              </button>
+
+            </div>
 
           </form>
 
@@ -407,6 +462,7 @@
         <div class="section-header">
 
           <div>
+
             <span class="section-label">
               ATIVIDADES
             </span>
@@ -417,6 +473,7 @@
               Acompanhe as atividades realizadas
               durante a simulação.
             </p>
+
           </div>
 
           <button
@@ -434,12 +491,14 @@
           <table>
 
             <thead>
+
               <tr>
                 <th>Data</th>
                 <th>Ativo</th>
                 <th>Ação</th>
                 <th>Detalhes</th>
               </tr>
+
             </thead>
 
             <tbody id="historico-corpo"></tbody>
@@ -462,12 +521,15 @@
     <div class="modal-card">
 
       <div class="modal-header">
+
         <div>
+
           <span class="section-label">
             PERFIL
           </span>
 
           <h2>Editar perfil</h2>
+
         </div>
 
         <button
@@ -477,11 +539,13 @@
         >
           ×
         </button>
+
       </div>
 
       <form id="profile-form">
 
         <div class="form-group">
+
           <label for="profile-input-name">
             Nome
           </label>
@@ -491,9 +555,11 @@
             type="text"
             required
           >
+
         </div>
 
         <div class="form-group">
+
           <label for="profile-input-email">
             E-mail
           </label>
@@ -503,9 +569,11 @@
             type="email"
             required
           >
+
         </div>
 
         <div class="form-group">
+
           <label for="profile-input-password">
             Nova senha
           </label>
@@ -515,6 +583,7 @@
             type="password"
             placeholder="Deixe vazio para manter a atual"
           >
+
         </div>
 
         <button
