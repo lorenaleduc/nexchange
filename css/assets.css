@@ -1,138 +1,194 @@
-.market-section,
-.admin-assets {
-  margin-bottom: 38px;
-}
-
-.market-status {
-  padding: 7px 10px;
-  background: #ebfaf4;
-  border-radius: 20px;
-  color: var(--color-success);
-  font-size: 0.73rem;
-}
-
-.market-status i {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 5px;
-  background: #3ee3a3;
-  border-radius: 50%;
-}
-
-.asset-grid {
+.assets-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 13px;
+  gap: 16px;
 }
 
 .asset {
-  padding: 16px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
+  min-height: 180px;
+  padding: 22px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.025)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+
+  backdrop-filter: blur(20px);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.asset:hover {
+  transform: translateY(-3px);
+  border-color: rgba(139, 92, 246, 0.35);
 }
 
 .asset-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  margin-bottom: 28px;
 }
 
 .asset-symbol {
-  padding: 5px 7px;
-  background: var(--color-primary-soft);
-  border-radius: 5px;
-  color: var(--color-primary);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.76rem;
-  font-weight: 500;
+  color: #a78bfa;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .asset-kind {
-  color: var(--color-text-secondary);
-  font-size: 0.67rem;
+  padding: 5px 9px;
+
+  color: #8f8a9c;
+  background: rgba(255, 255, 255, 0.045);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+
+  font-size: 10px;
 }
 
 .asset h3 {
-  margin: 14px 0 7px;
-  font-size: 0.92rem;
+  margin-bottom: 8px;
+
+  color: #ffffff;
+
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .asset-price {
-  font-family: 'DM Mono', monospace;
-  font-size: 1.05rem;
+  color: #ffffff;
+
+  font-family: 'Sora', sans-serif;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
 }
 
 .asset-change {
-  margin-left: 6px;
-  color: var(--color-success);
-  font-size: 0.68rem;
+  margin-top: auto;
+  padding-top: 18px;
+
+  color: #4ade80;
+
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .asset-change.down {
-  color: #d85151;
+  color: #f87171;
 }
+
+/* Administração de ativos */
 
 .admin-assets-layout {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: minmax(300px, 420px) 1fr;
   gap: 20px;
+  align-items: start;
 }
 
-.asset-form,
 .admin-assets-list {
-  display: grid;
-  gap: 14px;
-  padding: 22px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .admin-asset-item {
+  padding: 17px 18px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 13px;
-  border-bottom: 1px solid var(--color-border);
-}
+  gap: 20px;
 
-.admin-asset-item:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
-}
+  background: rgba(255, 255, 255, 0.035);
 
-.admin-asset-item strong,
-.admin-asset-item small {
-  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 15px;
 }
 
 .admin-asset-item strong {
-  font-size: 0.8rem;
+  display: block;
+  margin-bottom: 5px;
+
+  color: #ffffff;
+  font-size: 13px;
 }
 
 .admin-asset-item small {
-  margin-top: 4px;
-  color: var(--color-text-secondary);
-  font-size: 0.7rem;
+  color: #777386;
+  font-size: 11px;
 }
 
-@media (max-width: 1050px) {
-  .asset-grid {
+.item-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button,
+.delete-button {
+  padding: 7px 10px;
+
+  background: transparent;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.edit-button {
+  color: #a78bfa;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.edit-button:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.delete-button {
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.18);
+}
+
+.delete-button:hover {
+  background: rgba(248, 113, 113, 0.08);
+}
+
+@media (max-width: 1200px) {
+  .assets-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media (max-width: 800px) {
   .admin-assets-layout {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 520px) {
-  .asset-grid {
+@media (max-width: 600px) {
+  .assets-grid {
     grid-template-columns: 1fr;
+  }
+
+  .admin-asset-item {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

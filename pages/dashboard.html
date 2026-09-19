@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard | NEXCHANGE</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/assets.css">
+  <link rel="stylesheet" href="../css/rules.css">
+</head>
+
+<body>
+
+  <div class="app-screen">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-brand">
+        <span class="brand-mark">N</span>
+
+        <div>
+          <strong>NEXCHANGE</strong>
+          <small>Simulador de investimentos</small>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#inicio" class="active">
+          Início
+        </a>
+
+        <a href="#mercado">
+          Mercado
+        </a>
+
+        <a href="#regras">
+          Regras
+        </a>
+
+        <a href="#historico">
+          Histórico
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logout-button" type="button">
+          Sair
+        </button>
+      </div>
+
+    </aside>
+
+    <main class="dashboard">
+
+      <header class="dashboard-header" id="inicio">
+
+        <div>
+          <span id="user-role">
+            PAINEL DO INVESTIDOR
+          </span>
+
+          <h1>
+            Olá,
+            <span id="user-first-name"></span>
+          </h1>
+
+          <p>
+            Acompanhe seus investimentos e configure
+            suas regras.
+          </p>
+        </div>
+
+        <div class="profile">
+
+          <div class="avatar" id="avatar">
+            NX
+          </div>
+
+          <div class="profile-info">
+            <strong id="profile-name">
+              Usuário
+            </strong>
+
+            <small id="profile-type">
+              Perfil moderado
+            </small>
+          </div>
+
+          <button
+            id="edit-profile-button"
+            type="button"
+          >
+            Editar perfil
+          </button>
+
+        </div>
+
+      </header>
+
+      <section class="summary-grid">
+
+        <article class="summary-card">
+          <span>Saldo disponível</span>
+          <strong id="saldo">R$ 0,00</strong>
+          <small>Saldo simulado</small>
+        </article>
+
+        <article class="summary-card">
+          <span>Valor reservado</span>
+          <strong id="reservado">R$ 0,00</strong>
+          <small>Reservado pelas regras</small>
+        </article>
+
+        <article class="summary-card">
+          <span>Regras</span>
+          <strong id="regras-resumo">
+            Nenhuma regra ativa
+          </strong>
+          <small>Regras de investimento</small>
+        </article>
+
+        <article class="summary-card">
+          <span>Automação</span>
+
+          <div class="automation-control">
+            <label class="switch">
+              <input
+                id="automacao"
+                type="checkbox"
+              >
+              <span class="slider"></span>
+            </label>
+
+            <strong id="automacao-status">
+              Desativada
+            </strong>
+          </div>
+
+          <small>Simulação automática</small>
+        </article>
+
+      </section>
+
+      <section class="dashboard-section" id="mercado">
+
+        <div class="section-header">
+          <div>
+            <span class="section-label">
+              MERCADO
+            </span>
+
+            <h2>Ativos disponíveis</h2>
+
+            <p>
+              Consulte os ativos disponíveis na
+              simulação.
+            </p>
+          </div>
+        </div>
+
+        <div class="assets-grid" id="ativos"></div>
+
+      </section>
+
+      <section
+        class="dashboard-section hidden"
+        id="admin-assets"
+      >
+
+        <div class="section-header">
+          <div>
+            <span class="section-label">
+              ADMINISTRAÇÃO
+            </span>
+
+            <h2>Gerenciar ativos</h2>
+
+            <p>
+              Cadastre, edite ou exclua ativos
+              disponíveis no sistema.
+            </p>
+          </div>
+        </div>
+
+        <div class="admin-assets-layout">
+
+          <form
+            id="asset-form"
+            class="panel-form"
+          >
+
+            <input
+              type="hidden"
+              id="asset-original-symbol"
+            >
+
+            <div class="form-group">
+              <label for="asset-name">
+                Nome
+              </label>
+
+              <input
+                id="asset-name"
+                type="text"
+                placeholder="Ex.: Petrobras PN"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="asset-symbol">
+                Símbolo
+              </label>
+
+              <input
+                id="asset-symbol"
+                type="text"
+                placeholder="Ex.: PETR4"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="asset-kind">
+                Tipo
+              </label>
+
+              <input
+                id="asset-kind"
+                type="text"
+                placeholder="Ex.: Ação"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="asset-price">
+                Preço
+              </label>
+
+              <input
+                id="asset-price"
+                type="number"
+                min="0.01"
+                step="0.01"
+                placeholder="0,00"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="asset-change">
+                Variação
+              </label>
+
+              <input
+                id="asset-change"
+                type="text"
+                placeholder="Ex.: +1,25%"
+                required
+              >
+            </div>
+
+            <div class="form-actions">
+
+              <button
+                id="asset-submit"
+                type="submit"
+                class="primary-button"
+              >
+                Adicionar ativo
+              </button>
+
+              <button
+                id="asset-cancel"
+                type="button"
+                class="secondary-button hidden"
+              >
+                Cancelar
+              </button>
+
+            </div>
+
+          </form>
+
+          <div
+            class="admin-assets-list"
+            id="admin-assets-list"
+          ></div>
+
+        </div>
+
+      </section>
+
+      <section
+        class="dashboard-section"
+        id="regras"
+      >
+
+        <div class="section-header">
+          <div>
+            <span class="section-label">
+              AUTOMAÇÃO
+            </span>
+
+            <h2>Regras de investimento</h2>
+
+            <p>
+              Configure condições para acompanhar
+              oportunidades de investimento.
+            </p>
+          </div>
+
+          <span id="contador-regras">
+            0 regra(s)
+          </span>
+        </div>
+
+        <div class="rules-layout">
+
+          <form
+            id="form-regra"
+            class="panel-form"
+          >
+
+            <div class="form-group">
+              <label for="ativo">
+                Ativo
+              </label>
+
+              <select
+                id="ativo"
+                required
+              ></select>
+
+              <small id="preco-atual"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="preco-alvo">
+                Preço-alvo
+              </label>
+
+              <input
+                id="preco-alvo"
+                type="number"
+                min="0.01"
+                step="0.01"
+                placeholder="0,00"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="valor">
+                Valor limite
+              </label>
+
+              <input
+                id="valor"
+                type="number"
+                min="0.01"
+                step="0.01"
+                placeholder="0,00"
+                required
+              >
+            </div>
+
+            <label class="checkbox-field">
+              <input
+                id="notificar"
+                type="checkbox"
+              >
+
+              Receber notificação
+            </label>
+
+            <button
+              class="primary-button"
+              type="submit"
+            >
+              Criar regra
+            </button>
+
+          </form>
+
+          <div
+            class="rules-list"
+            id="lista-regras"
+          ></div>
+
+        </div>
+
+      </section>
+
+      <section
+        class="dashboard-section"
+        id="historico"
+      >
+
+        <div class="section-header">
+
+          <div>
+            <span class="section-label">
+              ATIVIDADES
+            </span>
+
+            <h2>Histórico</h2>
+
+            <p>
+              Acompanhe as atividades realizadas
+              durante a simulação.
+            </p>
+          </div>
+
+          <button
+            id="limpar-historico"
+            class="secondary-button"
+            type="button"
+          >
+            Limpar histórico
+          </button>
+
+        </div>
+
+        <div class="table-container">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Ativo</th>
+                <th>Ação</th>
+                <th>Detalhes</th>
+              </tr>
+            </thead>
+
+            <tbody id="historico-corpo"></tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <div
+    id="profile-modal"
+    class="modal hidden"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-header">
+        <div>
+          <span class="section-label">
+            PERFIL
+          </span>
+
+          <h2>Editar perfil</h2>
+        </div>
+
+        <button
+          id="close-profile-modal"
+          type="button"
+          class="modal-close"
+        >
+          ×
+        </button>
+      </div>
+
+      <form id="profile-form">
+
+        <div class="form-group">
+          <label for="profile-input-name">
+            Nome
+          </label>
+
+          <input
+            id="profile-input-name"
+            type="text"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="profile-input-email">
+            E-mail
+          </label>
+
+          <input
+            id="profile-input-email"
+            type="email"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="profile-input-password">
+            Nova senha
+          </label>
+
+          <input
+            id="profile-input-password"
+            type="password"
+            placeholder="Deixe vazio para manter a atual"
+          >
+        </div>
+
+        <button
+          class="primary-button"
+          type="submit"
+        >
+          Salvar alterações
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <div
+    id="toast"
+    class="toast"
+  ></div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/usuarios.js"></script>
+  <script src="../js/ativos.js"></script>
+  <script src="../js/regras.js"></script>
+  <script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>
