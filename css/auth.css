@@ -1,0 +1,124 @@
+.auth-screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+}
+
+.auth-brand {
+  min-height: 100vh;
+  padding: 42px clamp(32px, 8vw, 130px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--color-secondary);
+  color: #d9e2f0;
+}
+
+.auth-brand h1 {
+  max-width: 550px;
+  color: var(--color-text-light);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+}
+
+.auth-brand p:not(.eyebrow) {
+  max-width: 500px;
+  color: #aab8cc;
+  line-height: 1.7;
+}
+
+.auth-card {
+  width: min(100% - 44px, 430px);
+  margin: auto;
+  padding: 30px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.auth-tab {
+  padding: 10px;
+  background: none;
+  border-radius: 0;
+  color: var(--color-text-secondary);
+}
+
+.auth-tab.active {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+}
+
+.auth-form h2 {
+  font-size: 1.45rem;
+  letter-spacing: -0.035em;
+}
+
+.admin-credentials {
+  display: grid;
+  gap: 4px;
+  padding: 13px;
+  background: var(--color-primary-soft);
+  border: 1px solid #cfdcff;
+  border-radius: 8px;
+  color: #37517e;
+  font-size: 0.75rem;
+}
+
+.admin-credentials strong {
+  color: var(--color-primary);
+}
+
+.admin-credentials b {
+  font-family: 'DM Mono', monospace;
+}
+
+.auth-message {
+  min-height: 22px;
+  margin-top: 14px;
+  font-size: 0.78rem;
+}
+
+.auth-message.error {
+  color: var(--color-danger);
+}
+
+.auth-message.success {
+  color: var(--color-success);
+}
+
+@media (max-width: 800px) {
+  .auth-screen {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-brand {
+    min-height: auto;
+    padding: 28px;
+    gap: 42px;
+  }
+
+  .auth-brand .brand {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .auth-card {
+    width: min(100% - 28px, 430px);
+    padding: 22px;
+  }
+}

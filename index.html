@@ -1,276 +1,292 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexchange - Investimentos automatizados</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <section id="auth-screen" class="auth-screen" aria-label="Autenticação">
-      <div class="auth-brand">
-        <a class="brand" href="#">
-          <span class="brand-mark">N</span>
-          <span>NEXCHANGE</span>
-        </a>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/assets.css">
+  <link rel="stylesheet" href="css/rules.css">
+</head>
+
+<body>
+  <section id="auth-screen" class="auth-screen" aria-label="Autenticação">
+    <div class="auth-brand">
+      <a class="brand" href="#">
+        <span class="brand-mark">N</span>
+        <span>NEXCHANGE</span>
+      </a>
+      <div>
+        <p class="eyebrow">INVESTIMENTOS SIMPLIFICADOS</p>
+        <h1>Decisões mais claras para o seu dinheiro.</h1>
+        <p>
+          Acompanhe ativos e organize regras de compra em um ambiente seguro
+          de simulação.
+        </p>
+      </div>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-tabs" role="tablist" aria-label="Opções de acesso">
+        <button class="auth-tab active" data-auth-tab="login" type="button">Entrar</button>
+        <button class="auth-tab" data-auth-tab="register" type="button">Criar conta</button>
+      </div>
+
+      <form id="login-form" class="auth-form">
         <div>
-          <p class="eyebrow">INVESTIMENTOS SIMPLIFICADOS</p>
-          <h1>Decisões mais claras para o seu dinheiro.</h1>
-          <p>
-            Acompanhe ativos e organize regras de compra em um ambiente seguro
-            de simulação.
-          </p>
+          <p class="eyebrow">BEM-VINDO DE VOLTA</p>
+          <h2>Entre na sua conta</h2>
         </div>
+        <label>
+          E-mail
+          <input id="login-email" type="email" autocomplete="email" required placeholder="voce@exemplo.com">
+        </label>
+        <label>
+          Senha
+          <input id="login-password" type="password" autocomplete="current-password" required placeholder="Sua senha">
+        </label>
+        <div class="admin-credentials">
+          <strong>Credenciais de administrador</strong>
+          <span>E-mail: <b>admin@nexchange.com</b></span>
+          <span>Senha: <b>admin123</b></span>
+        </div>
+        <button type="submit">Entrar</button>
+      </form>
+
+      <form id="register-form" class="auth-form hidden">
+        <div>
+          <p class="eyebrow">NOVA CONTA</p>
+          <h2>Comece a simular</h2>
+        </div>
+        <label>
+          Nome completo
+          <input id="register-name" type="text" autocomplete="name" required placeholder="Como podemos chamar você?">
+        </label>
+        <label>
+          E-mail
+          <input id="register-email" type="email" autocomplete="email" required placeholder="voce@exemplo.com">
+        </label>
+        <label>
+          Senha
+          <input id="register-password" type="password" autocomplete="new-password" minlength="4" required
+            placeholder="Mínimo de 4 caracteres">
+        </label>
+        <button type="submit">Criar conta</button>
+      </form>
+      <p id="auth-message" class="auth-message" role="alert"></p>
+    </div>
+  </section>
+
+  <div id="app-screen" class="app-screen hidden">
+    <aside class="sidebar">
+      <a class="brand" href="#inicio">
+        <span class="brand-mark">N</span>
+        <span>NEXCHANGE</span>
+      </a>
+      <nav>
+        <a class="active" href="#inicio">Visão geral</a>
+        <a href="#mercado">Mercado</a>
+        <a href="#regras">Minhas regras</a>
+        <a href="#historico">Histórico</a>
+      </nav>
+      <div class="sidebar-note">
+        <span class="dot"></span> Ambiente de simulação
+        <br>
+        <small>Nenhuma operação é real</small>
       </div>
+    </aside>
 
-      <div class="auth-card">
-        <div class="auth-tabs" role="tablist" aria-label="Opções de acesso">
-          <button class="auth-tab active" data-auth-tab="login" type="button">Entrar</button>
-          <button class="auth-tab" data-auth-tab="register" type="button">Criar conta</button>
+    <main>
+      <header id="inicio" class="topbar">
+        <div>
+          <p id="user-role" class="eyebrow">PAINEL DO INVESTIDOR</p>
+          <h1>Olá, <span id="user-first-name">investidor</span>.</h1>
+          <p class="subtitle">Acompanhe o mercado e prepare suas regras de compra.</p>
         </div>
-
-        <form id="login-form" class="auth-form">
+        <div class="profile">
+          <span id="avatar" class="avatar">IN</span>
           <div>
-            <p class="eyebrow">BEM-VINDO DE VOLTA</p>
-            <h2>Entre na sua conta</h2>
+            <strong id="profile-name">Investidor</strong>
+            <small id="profile-type">Perfil moderado</small>
           </div>
-          <label>
-            E-mail
-            <input id="login-email" type="email" autocomplete="email" required placeholder="voce@exemplo.com">
-          </label>
-          <label>
-            Senha
-            <input id="login-password" type="password" autocomplete="current-password" required placeholder="Sua senha">
-          </label>
-          <div class="admin-credentials">
-            <strong>Credenciais de administrador</strong>
-            <span>E-mail: <b>admin@nexchange.com</b></span>
-            <span>Senha: <b>admin123</b></span>
-          </div>
-          <button type="submit">Entrar</button>
-        </form>
-
-        <form id="register-form" class="auth-form hidden">
-          <div>
-            <p class="eyebrow">NOVA CONTA</p>
-            <h2>Comece a simular</h2>
-          </div>
-          <label>
-            Nome completo
-            <input id="register-name" type="text" autocomplete="name" required placeholder="Como podemos chamar você?">
-          </label>
-          <label>
-            E-mail
-            <input id="register-email" type="email" autocomplete="email" required placeholder="voce@exemplo.com">
-          </label>
-          <label>
-            Senha
-            <input id="register-password" type="password" autocomplete="new-password" minlength="4" required placeholder="Mínimo de 4 caracteres">
-          </label>
-          <button type="submit">Criar conta</button>
-        </form>
-        <p id="auth-message" class="auth-message" role="alert"></p>
-      </div>
-    </section>
-
-    <div id="app-screen" class="app-screen hidden">
-      <aside class="sidebar">
-        <a class="brand" href="#inicio">
-          <span class="brand-mark">N</span>
-          <span>NEXCHANGE</span>
-        </a>
-        <nav>
-          <a class="active" href="#inicio">Visão geral</a>
-          <a href="#mercado">Mercado</a>
-          <a href="#regras">Minhas regras</a>
-          <a href="#historico">Histórico</a>
-        </nav>
-        <div class="sidebar-note">
-          <span class="dot"></span> Ambiente de simulação
-          <br>
-          <small>Nenhuma operação é real</small>
+          <button id="edit-profile-button" class="logout-button" type="button">Editar perfil</button>
+          <button id="logout-button" class="logout-button" type="button">Sair</button>
         </div>
-      </aside>
+      </header>
 
-      <main>
-        <header id="inicio" class="topbar">
+      <section class="summary-grid" aria-label="Resumo da carteira">
+        <article class="summary-card">
+          <span>Saldo disponível</span>
+          <strong id="saldo">R$ 10.000,00</strong>
+          <small>Valor fictício para simulação</small>
+        </article>
+        <article class="summary-card">
+          <span>Valor em regras</span>
+          <strong id="reservado">R$ 0,00</strong>
+          <small id="regras-resumo">Nenhuma regra ativa</small>
+        </article>
+        <article class="summary-card">
+          <span>Automação</span>
+          <strong id="automacao-status">Desativada</strong>
+          <label class="toggle">
+            <input id="automacao" type="checkbox">
+            <span></span>
+          </label>
+        </article>
+      </section>
+
+      <section id="mercado" class="market-section">
+        <div class="section-head">
           <div>
-            <p id="user-role" class="eyebrow">PAINEL DO INVESTIDOR</p>
-            <h1>Olá, <span id="user-first-name">investidor</span>.</h1>
-            <p class="subtitle">Acompanhe o mercado e prepare suas regras de compra.</p>
+            <p class="eyebrow">MERCADO</p>
+            <h2>Ativos acompanhados</h2>
+            <p>Valores ilustrativos atualizados apenas para demonstração.</p>
           </div>
-          <div class="profile">
-            <span id="avatar" class="avatar">IN</span>
-            <div>
-              <strong id="profile-name">Investidor</strong>
-              <small id="profile-type">Perfil moderado</small>
-            </div>
-            <button id="edit-profile-button" class="logout-button" type="button">Editar perfil</button>
-            <button id="logout-button" class="logout-button" type="button">Sair</button>
-          </div>
-        </header>
+          <span class="market-status"><i></i> Mercado simulado aberto</span>
+        </div>
+        <div id="ativos" class="asset-grid"></div>
+      </section>
 
-        <section class="summary-grid" aria-label="Resumo da carteira">
-          <article class="summary-card">
-            <span>Saldo disponível</span>
-            <strong id="saldo">R$ 10.000,00</strong>
-            <small>Valor fictício para simulação</small>
-          </article>
-          <article class="summary-card">
-            <span>Valor em regras</span>
-            <strong id="reservado">R$ 0,00</strong>
-            <small id="regras-resumo">Nenhuma regra ativa</small>
-          </article>
-          <article class="summary-card">
-            <span>Automação</span>
-            <strong id="automacao-status">Desativada</strong>
-            <label class="toggle">
-              <input id="automacao" type="checkbox">
-              <span></span>
+      <section id="admin-assets" class="admin-assets hidden">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">ADMINISTRAÇÃO</p>
+            <h2>Gerenciar ativos financeiros</h2>
+            <p>Cadastre, altere preços ou remova ativos da simulação.</p>
+          </div>
+        </div>
+        <div class="admin-assets-layout">
+          <form id="asset-form" class="asset-form">
+            <input id="asset-original-symbol" type="hidden">
+            <label>
+              Nome do ativo
+              <input id="asset-name" type="text" required placeholder="Ex.: Itaú Unibanco PN">
             </label>
-          </article>
-        </section>
-
-        <section id="mercado" class="market-section">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">MERCADO</p>
-              <h2>Ativos acompanhados</h2>
-              <p>Valores ilustrativos atualizados apenas para demonstração.</p>
-            </div>
-            <span class="market-status"><i></i> Mercado simulado aberto</span>
-          </div>
-          <div id="ativos" class="asset-grid"></div>
-        </section>
-
-        <section id="admin-assets" class="admin-assets hidden">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">ADMINISTRAÇÃO</p>
-              <h2>Gerenciar ativos financeiros</h2>
-              <p>Cadastre, altere preços ou remova ativos da simulação.</p>
-            </div>
-          </div>
-          <div class="admin-assets-layout">
-            <form id="asset-form" class="asset-form">
-              <input id="asset-original-symbol" type="hidden">
+            <div class="two-columns">
               <label>
-                Nome do ativo
-                <input id="asset-name" type="text" required placeholder="Ex.: Itaú Unibanco PN">
+                Símbolo
+                <input id="asset-symbol" type="text" required placeholder="Ex.: ITUB4">
               </label>
-              <div class="two-columns">
-                <label>
-                  Símbolo
-                  <input id="asset-symbol" type="text" required placeholder="Ex.: ITUB4">
-                </label>
-                <label>
-                  Tipo
-                  <input id="asset-kind" type="text" required placeholder="Ex.: Ação">
-                </label>
-              </div>
-              <div class="two-columns">
-                <label>
-                  Preço simulado
-                  <input id="asset-price" type="number" min="0.01" step="0.01" required placeholder="Ex.: 35,90">
-                </label>
-                <label>
-                  Variação
-                  <input id="asset-change" type="text" required placeholder="Ex.: +1,25%">
-                </label>
-              </div>
-              <div class="form-actions">
-                <button id="asset-submit" type="submit">Adicionar ativo</button>
-                <button id="asset-cancel" class="secondary-button hidden" type="button">Cancelar edição</button>
-              </div>
-            </form>
-            <div id="admin-assets-list" class="admin-assets-list"></div>
-          </div>
-        </section>
-
-        <section id="regras" class="rules-layout">
-          <article class="rule-builder">
-            <p class="eyebrow">NOVA REGRA</p>
-            <h2>Comprar quando atingir meu preço</h2>
-            <p class="hint">Defina o preço máximo que você aceitaria pagar. A regra é apenas uma demonstração.</p>
-            <form id="form-regra">
-              <label>Ativo <select id="ativo" required></select></label>
-              <div class="two-columns">
-                <label>
-                  Comprar se chegar a
-                  <input id="preco-alvo" type="number" min="0.01" step="0.01" required placeholder="Ex.: 32,00">
-                  <span id="preco-atual" class="field-tip"></span>
-                </label>
-                <label>
-                  Valor máximo da compra
-                  <input id="valor" type="number" min="1" step="0.01" required placeholder="Ex.: 500,00">
-                </label>
-              </div>
-              <label class="checkbox-line">
-                <input id="notificar" type="checkbox" checked>
-                Notificar quando a condição for atingida
+              <label>
+                Tipo
+                <input id="asset-kind" type="text" required placeholder="Ex.: Ação">
               </label>
-              <button type="submit">Adicionar regra de compra</button>
-            </form>
-          </article>
-
-          <article class="rules-list-card">
-            <div class="section-head compact">
-              <div>
-                <p class="eyebrow">SUAS REGRAS</p>
-                <h2>Ordens programadas</h2>
-              </div>
-              <span id="contador-regras">0 regras</span>
             </div>
-            <div id="lista-regras" class="rules-list"></div>
-          </article>
-        </section>
+            <div class="two-columns">
+              <label>
+                Preço simulado
+                <input id="asset-price" type="number" min="0.01" step="0.01" required placeholder="Ex.: 35,90">
+              </label>
+              <label>
+                Variação
+                <input id="asset-change" type="text" required placeholder="Ex.: +1,25%">
+              </label>
+            </div>
+            <div class="form-actions">
+              <button id="asset-submit" type="submit">Adicionar ativo</button>
+              <button id="asset-cancel" class="secondary-button hidden" type="button">Cancelar edição</button>
+            </div>
+          </form>
+          <div id="admin-assets-list" class="admin-assets-list"></div>
+        </div>
+      </section>
 
-        <section id="historico" class="history-section">
+      <section id="regras" class="rules-layout">
+        <article class="rule-builder">
+          <p class="eyebrow">NOVA REGRA</p>
+          <h2>Comprar quando atingir meu preço</h2>
+          <p class="hint">Defina o preço máximo que você aceitaria pagar. A regra é apenas uma demonstração.</p>
+          <form id="form-regra">
+            <label>Ativo <select id="ativo" required></select></label>
+            <div class="two-columns">
+              <label>
+                Comprar se chegar a
+                <input id="preco-alvo" type="number" min="0.01" step="0.01" required placeholder="Ex.: 32,00">
+                <span id="preco-atual" class="field-tip"></span>
+              </label>
+              <label>
+                Valor máximo da compra
+                <input id="valor" type="number" min="1" step="0.01" required placeholder="Ex.: 500,00">
+              </label>
+            </div>
+            <label class="checkbox-line">
+              <input id="notificar" type="checkbox" checked>
+              Notificar quando a condição for atingida
+            </label>
+            <button type="submit">Adicionar regra de compra</button>
+          </form>
+        </article>
+
+        <article class="rules-list-card">
           <div class="section-head compact">
             <div>
-              <p class="eyebrow">ATIVIDADE</p>
-              <h2>Histórico de simulações</h2>
+              <p class="eyebrow">SUAS REGRAS</p>
+              <h2>Ordens programadas</h2>
             </div>
-            <button id="limpar-historico" class="text-button" type="button">Limpar</button>
+            <span id="contador-regras">0 regras</span>
           </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Data</th><th>Ativo</th><th>Ação</th><th>Detalhe</th></tr></thead>
-              <tbody id="historico-corpo"></tbody>
-            </table>
-          </div>
-        </section>
-      </main>
-    </div>
+          <div id="lista-regras" class="rules-list"></div>
+        </article>
+      </section>
 
-    <div id="profile-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
-      <div class="modal-card">
-        <div class="modal-heading">
+      <section id="historico" class="history-section">
+        <div class="section-head compact">
           <div>
-            <p class="eyebrow">MINHA CONTA</p>
-            <h2 id="profile-modal-title">Editar perfil</h2>
+            <p class="eyebrow">ATIVIDADE</p>
+            <h2>Histórico de simulações</h2>
           </div>
-          <button id="close-profile-modal" class="close-button" type="button" aria-label="Fechar">×</button>
+          <button id="limpar-historico" class="text-button" type="button">Limpar</button>
         </div>
-        <form id="profile-form" class="auth-form">
-          <label>
-            Nome completo
-            <input id="profile-input-name" type="text" required>
-          </label>
-          <label>
-            E-mail
-            <input id="profile-input-email" type="email" required>
-          </label>
-          <label>
-            Nova senha <span class="field-tip">Deixe em branco para manter a atual.</span>
-            <input id="profile-input-password" type="password" minlength="4" placeholder="Mínimo de 4 caracteres">
-          </label>
-          <button type="submit">Salvar alterações</button>
-        </form>
-      </div>
-    </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Ativo</th>
+                <th>Ação</th>
+                <th>Detalhe</th>
+              </tr>
+            </thead>
+            <tbody id="historico-corpo"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
 
-    <div id="toast" role="status" aria-live="polite"></div>
-    <script src="js/mercado.js"></script>
-  </body>
+  <div id="profile-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
+    <div class="modal-card">
+      <div class="modal-heading">
+        <div>
+          <p class="eyebrow">MINHA CONTA</p>
+          <h2 id="profile-modal-title">Editar perfil</h2>
+        </div>
+        <button id="close-profile-modal" class="close-button" type="button" aria-label="Fechar">×</button>
+      </div>
+      <form id="profile-form" class="auth-form">
+        <label>
+          Nome completo
+          <input id="profile-input-name" type="text" required>
+        </label>
+        <label>
+          E-mail
+          <input id="profile-input-email" type="email" required>
+        </label>
+        <label>
+          Nova senha <span class="field-tip">Deixe em branco para manter a atual.</span>
+          <input id="profile-input-password" type="password" minlength="4" placeholder="Mínimo de 4 caracteres">
+        </label>
+        <button type="submit">Salvar alterações</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="js/mercado.js"></script>
+</body>
+
 </html>

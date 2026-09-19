@@ -1,0 +1,138 @@
+.market-section,
+.admin-assets {
+  margin-bottom: 38px;
+}
+
+.market-status {
+  padding: 7px 10px;
+  background: #ebfaf4;
+  border-radius: 20px;
+  color: var(--color-success);
+  font-size: 0.73rem;
+}
+
+.market-status i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 5px;
+  background: #3ee3a3;
+  border-radius: 50%;
+}
+
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+}
+
+.asset {
+  padding: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.asset-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.asset-symbol {
+  padding: 5px 7px;
+  background: var(--color-primary-soft);
+  border-radius: 5px;
+  color: var(--color-primary);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+.asset-kind {
+  color: var(--color-text-secondary);
+  font-size: 0.67rem;
+}
+
+.asset h3 {
+  margin: 14px 0 7px;
+  font-size: 0.92rem;
+}
+
+.asset-price {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.05rem;
+}
+
+.asset-change {
+  margin-left: 6px;
+  color: var(--color-success);
+  font-size: 0.68rem;
+}
+
+.asset-change.down {
+  color: #d85151;
+}
+
+.admin-assets-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 20px;
+}
+
+.asset-form,
+.admin-assets-list {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+.admin-asset-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.admin-asset-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.admin-asset-item strong,
+.admin-asset-item small {
+  display: block;
+}
+
+.admin-asset-item strong {
+  font-size: 0.8rem;
+}
+
+.admin-asset-item small {
+  margin-top: 4px;
+  color: var(--color-text-secondary);
+  font-size: 0.7rem;
+}
+
+@media (max-width: 1050px) {
+  .asset-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .admin-assets-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .asset-grid {
+    grid-template-columns: 1fr;
+  }
+}
