@@ -5,44 +5,66 @@ const DADOS_INICIAIS = {
   history: []
 };
 
-let dadosDashboard = carregarDadosDashboard();
+
+let dadosDashboard =
+  carregarDadosDashboard();
+
 
 function carregarDadosDashboard() {
-  const dadosSalvos = buscarDados();
+  const dadosSalvos =
+    buscarDados();
+
 
   if (!dadosSalvos) {
     const novosDados = {
-      balance: DADOS_INICIAIS.balance,
-      automation: DADOS_INICIAIS.automation,
+      balance:
+        DADOS_INICIAIS.balance,
+
+      automation:
+        DADOS_INICIAIS.automation,
+
       rules: [],
+
       history: []
     };
+
 
     salvarDados(novosDados);
 
     return novosDados;
   }
 
+
   return dadosSalvos;
 }
 
+
 function formatarDinheiro(valor) {
-  return valor.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  });
+  return valor.toLocaleString(
+    'pt-BR',
+    {
+      style: 'currency',
+      currency: 'BRL'
+    }
+  );
 }
 
+
 function mostrarToast(mensagem) {
-  const toast = document.getElementById('toast');
+  const toast =
+    document.getElementById('toast');
+
 
   toast.textContent = mensagem;
+
   toast.classList.add('show');
+
 
   setTimeout(() => {
     toast.classList.remove('show');
   }, 2700);
 }
+
 
 function adicionarHistorico(
   ativo,
@@ -50,12 +72,19 @@ function adicionarHistorico(
   detalhe
 ) {
   dadosDashboard.history.unshift({
-    date: new Date().toLocaleString('pt-BR'),
+    date:
+      new Date().toLocaleString(
+        'pt-BR'
+      ),
+
     asset: ativo,
+
     action: acao,
+
     detail: detalhe
   });
 }
+
 
 function renderizarResumo() {
   const reservado =
@@ -65,6 +94,7 @@ function renderizarResumo() {
       0
     );
 
+
   document.getElementById(
     'saldo'
   ).textContent =
@@ -72,10 +102,12 @@ function renderizarResumo() {
       dadosDashboard.balance
     );
 
+
   document.getElementById(
     'reservado'
   ).textContent =
     formatarDinheiro(reservado);
+
 
   document.getElementById(
     'regras-resumo'
@@ -84,16 +116,22 @@ function renderizarResumo() {
       ? `${dadosDashboard.rules.length} regra(s) configurada(s)`
       : 'Nenhuma regra ativa';
 
+
   const automacao =
-    document.getElementById('automacao');
+    document.getElementById(
+      'automacao'
+    );
+
 
   const status =
     document.getElementById(
       'automacao-status'
     );
 
+
   automacao.checked =
     dadosDashboard.automation;
+
 
   status.textContent =
     dadosDashboard.automation
@@ -101,11 +139,13 @@ function renderizarResumo() {
       : 'Desativada';
 }
 
+
 function renderizarHistorico() {
   const tabela =
     document.getElementById(
       'historico-corpo'
     );
+
 
   if (
     dadosDashboard.history.length === 0
@@ -121,38 +161,50 @@ function renderizarHistorico() {
     return;
   }
 
+
   tabela.innerHTML =
-    dadosDashboard.history.map(item => `
-      <tr>
-        <td>${item.date}</td>
-        <td>${item.asset}</td>
-        <td>${item.action}</td>
-        <td>${item.detail}</td>
-      </tr>
-    `).join('');
+    dadosDashboard.history.map(
+      item => `
+        <tr>
+          <td>${item.date}</td>
+          <td>${item.asset}</td>
+          <td>${item.action}</td>
+          <td>${item.detail}</td>
+        </tr>
+      `
+    ).join('');
 }
+
 
 function renderizarDashboard() {
   renderizarResumo();
+
   renderizarRegras();
+
   renderizarHistorico();
 }
+
 
 function alterarAutomacao(event) {
   dadosDashboard.automation =
     event.target.checked;
 
+
   adicionarHistorico(
     'Automação',
+
     dadosDashboard.automation
       ? 'Ativada'
       : 'Desativada',
+
     'Alteração de configuração'
   );
+
 
   salvarDados(dadosDashboard);
 
   renderizarDashboard();
+
 
   mostrarToast(
     dadosDashboard.automation
@@ -161,24 +213,30 @@ function alterarAutomacao(event) {
   );
 }
 
+
 function limparHistorico() {
   dadosDashboard.history = [];
+
 
   salvarDados(dadosDashboard);
 
   renderizarHistorico();
+
 
   mostrarToast(
     'Histórico limpo.'
   );
 }
 
+
 function sairDaConta() {
   removerSessao();
+
 
   window.location.href =
     '../index.html';
 }
+
 
 function adicionarEventos() {
   document
@@ -190,6 +248,7 @@ function adicionarEventos() {
       abrirModalPerfil
     );
 
+
   document
     .getElementById(
       'close-profile-modal'
@@ -198,6 +257,7 @@ function adicionarEventos() {
       'click',
       fecharModalPerfil
     );
+
 
   document
     .getElementById(
@@ -208,6 +268,7 @@ function adicionarEventos() {
       atualizarPerfil
     );
 
+
   document
     .getElementById(
       'logout-button'
@@ -216,6 +277,7 @@ function adicionarEventos() {
       'click',
       sairDaConta
     );
+
 
   document
     .getElementById(
@@ -226,6 +288,7 @@ function adicionarEventos() {
       salvarRegra
     );
 
+
   document
     .getElementById(
       'regra-cancelar'
@@ -234,6 +297,7 @@ function adicionarEventos() {
       'click',
       limparFormularioRegra
     );
+
 
   document
     .getElementById(
@@ -244,6 +308,7 @@ function adicionarEventos() {
       controlarCliqueRegra
     );
 
+
   document
     .getElementById(
       'asset-form'
@@ -252,6 +317,7 @@ function adicionarEventos() {
       'submit',
       salvarFormularioAtivo
     );
+
 
   document
     .getElementById(
@@ -262,6 +328,7 @@ function adicionarEventos() {
       limparFormularioAtivo
     );
 
+
   document
     .getElementById(
       'admin-assets-list'
@@ -270,6 +337,7 @@ function adicionarEventos() {
       'click',
       controlarCliqueAtivo
     );
+
 
   document
     .getElementById(
@@ -280,6 +348,7 @@ function adicionarEventos() {
       atualizarPrecoAtual
     );
 
+
   document
     .getElementById(
       'automacao'
@@ -289,6 +358,7 @@ function adicionarEventos() {
       alterarAutomacao
     );
 
+
   document
     .getElementById(
       'limpar-historico'
@@ -297,15 +367,48 @@ function adicionarEventos() {
       'click',
       limparHistorico
     );
+
+
+  document
+    .getElementById(
+      'admin-users-list'
+    )
+    .addEventListener(
+      'click',
+      controlarCliqueUsuario
+    );
+
+
+  document
+    .getElementById(
+      'admin-user-form'
+    )
+    .addEventListener(
+      'submit',
+      salvarEdicaoUsuario
+    );
+
+
+  document
+    .getElementById(
+      'close-admin-user-modal'
+    )
+    .addEventListener(
+      'click',
+      fecharEdicaoUsuario
+    );
 }
+
 
 function iniciarDashboard() {
   const usuario =
     carregarUsuarioAtual();
 
+
   if (!usuario) {
     return;
   }
+
 
   carregarAtivos();
 
@@ -317,6 +420,7 @@ function iniciarDashboard() {
 
   adicionarEventos();
 }
+
 
 document.addEventListener(
   'DOMContentLoaded',

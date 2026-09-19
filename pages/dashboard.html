@@ -22,16 +22,26 @@
     <aside class="sidebar">
 
       <div class="sidebar-brand">
-        <span class="brand-mark">N</span>
+
+        <span class="brand-mark">
+          N
+        </span>
 
         <div>
           <strong>NEXCHANGE</strong>
-          <small>Simulador de investimentos</small>
+          <small>
+            Simulador de investimentos
+          </small>
         </div>
+
       </div>
 
       <nav class="sidebar-nav">
-        <a href="#inicio" class="active">
+
+        <a
+          href="#inicio"
+          class="active"
+        >
           Início
         </a>
 
@@ -46,21 +56,31 @@
         <a href="#historico">
           Histórico
         </a>
+
       </nav>
 
       <div class="sidebar-footer">
-        <button id="logout-button" type="button">
+
+        <button
+          id="logout-button"
+          type="button"
+        >
           Sair
         </button>
+
       </div>
 
     </aside>
 
     <main class="dashboard">
 
-      <header class="dashboard-header" id="inicio">
+      <header
+        class="dashboard-header"
+        id="inicio"
+      >
 
         <div>
+
           <span id="user-role">
             PAINEL DO INVESTIDOR
           </span>
@@ -74,15 +94,20 @@
             Acompanhe seus investimentos e configure
             suas regras.
           </p>
+
         </div>
 
         <div class="profile">
 
-          <div class="avatar" id="avatar">
+          <div
+            class="avatar"
+            id="avatar"
+          >
             NX
           </div>
 
           <div class="profile-info">
+
             <strong id="profile-name">
               Usuário
             </strong>
@@ -90,6 +115,7 @@
             <small id="profile-type">
               Perfil moderado
             </small>
+
           </div>
 
           <button
@@ -106,39 +132,70 @@
       <section class="summary-grid">
 
         <article class="summary-card">
-          <span>Saldo disponível</span>
-          <strong id="saldo">R$ 0,00</strong>
-          <small>Saldo simulado</small>
+
+          <span>
+            Saldo disponível
+          </span>
+
+          <strong id="saldo">
+            R$ 0,00
+          </strong>
+
+          <small>
+            Saldo simulado
+          </small>
+
         </article>
 
         <article class="summary-card">
-          <span>Valor reservado</span>
-          <strong id="reservado">R$ 0,00</strong>
-          <small>Reservado pelas regras</small>
+
+          <span>
+            Valor reservado
+          </span>
+
+          <strong id="reservado">
+            R$ 0,00
+          </strong>
+
+          <small>
+            Reservado pelas regras
+          </small>
+
         </article>
 
         <article class="summary-card">
-          <span>Regras</span>
+
+          <span>
+            Regras
+          </span>
 
           <strong id="regras-resumo">
             Nenhuma regra ativa
           </strong>
 
-          <small>Regras de investimento</small>
+          <small>
+            Regras de investimento
+          </small>
+
         </article>
 
         <article class="summary-card">
-          <span>Automação</span>
+
+          <span>
+            Automação
+          </span>
 
           <div class="automation-control">
 
             <label class="switch">
+
               <input
                 id="automacao"
                 type="checkbox"
               >
 
               <span class="slider"></span>
+
             </label>
 
             <strong id="automacao-status">
@@ -147,7 +204,10 @@
 
           </div>
 
-          <small>Simulação automática</small>
+          <small>
+            Simulação automática
+          </small>
+
         </article>
 
       </section>
@@ -160,16 +220,20 @@
         <div class="section-header">
 
           <div>
+
             <span class="section-label">
               MERCADO
             </span>
 
-            <h2>Ativos disponíveis</h2>
+            <h2>
+              Ativos disponíveis
+            </h2>
 
             <p>
               Consulte os ativos disponíveis na
               simulação.
             </p>
+
           </div>
 
         </div>
@@ -189,16 +253,20 @@
         <div class="section-header">
 
           <div>
+
             <span class="section-label">
               ADMINISTRAÇÃO
             </span>
 
-            <h2>Gerenciar ativos</h2>
+            <h2>
+              Gerenciar ativos
+            </h2>
 
             <p>
               Cadastre, edite ou exclua ativos
               disponíveis no sistema.
             </p>
+
           </div>
 
         </div>
@@ -323,6 +391,43 @@
 
       </section>
 
+      <!-- GERENCIAMENTO DE USUÁRIOS -->
+
+      <section
+        class="dashboard-section hidden"
+        id="admin-users"
+      >
+
+        <div class="section-header">
+
+          <div>
+
+            <span class="section-label">
+              ADMINISTRAÇÃO
+            </span>
+
+            <h2>
+              Gerenciar usuários
+            </h2>
+
+            <p>
+              Visualize, edite ou exclua os
+              usuários cadastrados no sistema.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div
+          class="admin-users-list"
+          id="admin-users-list"
+        ></div>
+
+      </section>
+
+      <!-- REGRAS -->
+
       <section
         class="dashboard-section"
         id="regras"
@@ -336,7 +441,9 @@
               AUTOMAÇÃO
             </span>
 
-            <h2>Regras de investimento</h2>
+            <h2>
+              Regras de investimento
+            </h2>
 
             <p>
               Configure condições para acompanhar
@@ -454,6 +561,8 @@
 
       </section>
 
+      <!-- HISTÓRICO -->
+
       <section
         class="dashboard-section"
         id="historico"
@@ -467,7 +576,9 @@
               ATIVIDADES
             </span>
 
-            <h2>Histórico</h2>
+            <h2>
+              Histórico
+            </h2>
 
             <p>
               Acompanhe as atividades realizadas
@@ -513,6 +624,8 @@
 
   </div>
 
+  <!-- MODAL PERFIL -->
+
   <div
     id="profile-modal"
     class="modal hidden"
@@ -528,7 +641,9 @@
             PERFIL
           </span>
 
-          <h2>Editar perfil</h2>
+          <h2>
+            Editar perfil
+          </h2>
 
         </div>
 
@@ -580,6 +695,96 @@
 
           <input
             id="profile-input-password"
+            type="password"
+            placeholder="Deixe vazio para manter a atual"
+          >
+
+        </div>
+
+        <button
+          class="primary-button"
+          type="submit"
+        >
+          Salvar alterações
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL ADMINISTRAR USUÁRIO -->
+
+  <div
+    id="admin-user-modal"
+    class="modal hidden"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="section-label">
+            USUÁRIO
+          </span>
+
+          <h2>
+            Editar usuário
+          </h2>
+
+        </div>
+
+        <button
+          id="close-admin-user-modal"
+          type="button"
+          class="modal-close"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <form id="admin-user-form">
+
+        <div class="form-group">
+
+          <label for="admin-user-name">
+            Nome
+          </label>
+
+          <input
+            id="admin-user-name"
+            type="text"
+            required
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="admin-user-email">
+            E-mail
+          </label>
+
+          <input
+            id="admin-user-email"
+            type="email"
+            required
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="admin-user-password">
+            Nova senha
+          </label>
+
+          <input
+            id="admin-user-password"
             type="password"
             placeholder="Deixe vazio para manter a atual"
           >
