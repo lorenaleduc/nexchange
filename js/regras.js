@@ -319,20 +319,19 @@ function renderizarRegras() {
         </div>
 
         <div class="target">
-          Se chegar a
-          ${formatarDinheiro(regra.target)}
+          <span>Se chegar a</span>
+          <strong>${formatarDinheiro(regra.target)}</strong>
         </div>
 
-        <small>
-          Limite:
-          ${formatarDinheiro(regra.amount)}
-          ·
-          ${
-            regra.notify
-              ? 'Notificação ativada'
-              : 'Sem notificação'
-          }
-        </small>
+        <div class="rule-meta">
+          <span class="rule-limit">
+            Limite: ${formatarDinheiro(regra.amount)}
+          </span>
+
+          <span class="notify-badge ${regra.notify ? 'on' : ''}">
+            ${regra.notify ? 'Notificação ativada' : 'Sem notificação'}
+          </span>
+        </div>
 
       </div>
     `).join('');

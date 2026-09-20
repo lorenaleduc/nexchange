@@ -1,194 +1,423 @@
-.assets-grid {
+#ativos.assets-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 
-.asset {
-  min-height: 180px;
-  padding: 22px;
+#ativos .asset {
+  position: relative;
+  min-width: 0;
+  min-height: 190px;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
 
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.025)
-  );
+  padding: 22px;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 28, 22, 0.98),
+      rgba(10, 16, 12, 0.98)
+    );
 
-  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-left: 3px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 18px 40px rgba(0, 0, 0, 0.18);
 
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition);
 }
 
-.asset:hover {
-  transform: translateY(-3px);
-  border-color: rgba(139, 92, 246, 0.35);
+#ativos .asset:hover {
+  transform: translateY(-4px);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 34, 27, 0.99),
+      rgba(11, 18, 14, 0.99)
+    );
 }
 
-.asset-top {
+#ativos .asset[data-kind="Ação"] {
+  border-left-color: #818cf8;
+}
+
+#ativos .asset[data-kind="Ação"]:hover {
+  border-color: rgba(129, 140, 248, 0.3);
+  border-left-color: #818cf8;
+}
+
+#ativos .asset[data-kind="Cripto"] {
+  border-left-color: var(--amber);
+}
+
+#ativos .asset[data-kind="Cripto"]:hover {
+  border-color: var(--amber-border);
+  border-left-color: var(--amber);
+}
+
+#ativos .asset[data-kind="CDB"] {
+  border-left-color: var(--purple);
+}
+
+#ativos .asset[data-kind="CDB"]:hover {
+  border-color: var(--purple-border);
+  border-left-color: var(--purple);
+}
+
+#ativos .asset-top {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
-.asset-symbol {
-  color: #a78bfa;
+#ativos .asset-symbol {
+  color: var(--text-secondary);
 
+  font-family: var(--font-mono);
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-.asset-kind {
+#ativos .asset-kind {
+  flex-shrink: 0;
+
   padding: 5px 9px;
 
-  color: #8f8a9c;
-  background: rgba(255, 255, 255, 0.045);
+  background: rgba(255, 255, 255, 0.04);
 
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border);
   border-radius: 999px;
 
+  color: var(--text-secondary);
+
   font-size: 10px;
-}
-
-.asset h3 {
-  margin-bottom: 8px;
-
-  color: #ffffff;
-
-  font-family: 'Sora', sans-serif;
-  font-size: 16px;
   font-weight: 600;
 }
 
-.asset-price {
-  color: #ffffff;
-
-  font-family: 'Sora', sans-serif;
-  font-size: 23px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
+#ativos .asset[data-kind="Ação"] .asset-kind {
+  background: rgba(129, 140, 248, 0.1);
+  border-color: rgba(129, 140, 248, 0.26);
+  color: #a5b4fc;
 }
 
-.asset-change {
+#ativos .asset[data-kind="Cripto"] .asset-kind {
+  background: var(--amber-soft);
+  border-color: var(--amber-border);
+  color: var(--amber-light);
+}
+
+#ativos .asset[data-kind="CDB"] .asset-kind {
+  background: var(--purple-soft);
+  border-color: var(--purple-border);
+  color: var(--purple-light);
+}
+
+#ativos .asset h3 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 6px;
+
+  color: var(--text-primary);
+
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+#ativos .asset-price {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
   margin-top: auto;
-  padding-top: 18px;
 
-  color: #4ade80;
+  color: var(--text-primary);
 
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: clamp(19px, 1.4vw, 22px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+
+  white-space: nowrap;
+}
+
+#ativos .asset-change {
+  position: relative;
+  z-index: 1;
+
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  margin-top: 8px;
+  padding: 4px 8px;
+
+  background: rgba(52, 211, 153, 0.08);
+
+  border-radius: 7px;
+
+  color: var(--success);
+
+  font-family: var(--font-mono);
+  font-size: 10px;
   font-weight: 600;
 }
 
-.asset-change.down {
-  color: #f87171;
+#ativos .asset-change.down {
+  background: rgba(251, 113, 133, 0.08);
+
+  color: var(--danger);
 }
 
-/* Administração de ativos */
+#admin-assets {
+  padding-top: 10px;
+}
 
-.admin-assets-layout {
+#admin-assets .admin-layout {
   display: grid;
-  grid-template-columns: minmax(300px, 420px) 1fr;
-  gap: 20px;
+  grid-template-columns: minmax(320px, 390px) minmax(0, 1fr);
   align-items: start;
+  gap: 20px;
 }
 
-.admin-assets-list {
+#admin-assets .panel-form {
+  position: sticky;
+  top: 24px;
+}
+
+#admin-assets-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .admin-asset-item {
-  padding: 17px 18px;
+  min-height: 86px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
 
-  background: rgba(255, 255, 255, 0.035);
+  padding: 17px 18px;
 
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 15px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 27, 22, 0.96),
+      rgba(10, 16, 12, 0.98)
+    );
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition);
 }
 
-.admin-asset-item strong {
+.admin-asset-item:hover {
+  transform: translateY(-2px);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 33, 27, 0.98),
+      rgba(11, 18, 14, 0.98)
+    );
+
+  border-color: var(--purple-border);
+}
+
+.admin-asset-info {
+  min-width: 0;
+}
+
+.admin-asset-info strong {
   display: block;
+
   margin-bottom: 5px;
 
-  color: #ffffff;
-  font-size: 13px;
+  color: var(--text-primary);
+
+  font-size: 14px;
+  font-weight: 700;
 }
 
-.admin-asset-item small {
-  color: #777386;
+.admin-asset-info span,
+.admin-asset-info small {
+  color: var(--text-muted);
+
   font-size: 11px;
+  line-height: 1.5;
 }
 
-.item-actions {
+.admin-asset-actions {
+  flex-shrink: 0;
+
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
-.edit-button,
-.delete-button {
-  padding: 7px 10px;
+#admin-users {
+  padding-top: 10px;
+}
 
-  background: transparent;
+#admin-users-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
 
-  border-radius: 9px;
+.admin-user-item {
+  min-height: 96px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  padding: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 27, 22, 0.96),
+      rgba(10, 16, 12, 0.98)
+    );
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition);
+}
+
+.admin-user-item:hover {
+  transform: translateY(-2px);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 33, 27, 0.98),
+      rgba(11, 18, 14, 0.98)
+    );
+
+  border-color: var(--purple-border);
+}
+
+.admin-user-info {
+  min-width: 0;
+}
+
+.admin-user-info strong {
+  display: block;
+
+  overflow: hidden;
+
+  margin-bottom: 5px;
+
+  color: var(--text-primary);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-user-info span,
+.admin-user-info small {
+  display: block;
+
+  overflow: hidden;
+
+  color: var(--text-muted);
 
   font-size: 11px;
-  font-weight: 600;
 
-  transition: 0.2s ease;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.edit-button {
-  color: #a78bfa;
-  border: 1px solid rgba(139, 92, 246, 0.2);
+.admin-user-actions {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.edit-button:hover {
-  background: rgba(139, 92, 246, 0.1);
-}
-
-.delete-button {
-  color: #f87171;
-  border: 1px solid rgba(248, 113, 113, 0.18);
-}
-
-.delete-button:hover {
-  background: rgba(248, 113, 113, 0.08);
-}
-
-@media (max-width: 1200px) {
-  .assets-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1250px) {
+  #ativos.assets-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .admin-assets-layout {
+  #admin-assets .admin-layout {
+    grid-template-columns: 340px minmax(0, 1fr);
+  }
+
+  #admin-users-list {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 600px) {
-  .assets-grid {
+@media (max-width: 950px) {
+  #admin-assets .admin-layout {
     grid-template-columns: 1fr;
   }
 
-  .admin-asset-item {
+  #admin-assets .panel-form {
+    position: static;
+  }
+}
+
+@media (max-width: 650px) {
+  #ativos.assets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #ativos .asset {
+    min-height: 170px;
+  }
+
+  .admin-asset-item,
+  .admin-user-item {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .admin-asset-actions,
+  .admin-user-actions {
+    width: 100%;
+  }
+
+  .admin-asset-actions button,
+  .admin-user-actions button {
+    flex: 1;
   }
 }

@@ -46,7 +46,7 @@ function renderizarAtivos() {
   const container = document.getElementById('ativos');
 
   container.innerHTML = ativos.map(ativo => `
-    <article class="asset">
+    <article class="asset" data-kind="${ativo.kind}">
       <div class="asset-top">
         <span class="asset-symbol">${ativo.symbol}</span>
         <span class="asset-kind">${ativo.kind}</span>
