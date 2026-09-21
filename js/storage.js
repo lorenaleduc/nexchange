@@ -1,15 +1,8 @@
 const STORAGE_KEYS = {
-  usuarios:
-    'nexchange-users',
-
-  sessao:
-    'nexchange-session',
-
-  ativos:
-    'nexchange-assets',
-
-  dados:
-    'nexchange-user-data'
+  usuarios: 'nexchange-users',
+  sessao: 'nexchange-session',
+  ativos: 'nexchange-assets',
+  dados: 'nexchange-user-data'
 };
 
 
@@ -95,6 +88,33 @@ function salvarDadosUsuario(
 
   dados[email] =
     dadosUsuario;
+
+  localStorage.setItem(
+    STORAGE_KEYS.dados,
+    JSON.stringify(dados)
+  );
+}
+
+
+function alterarEmailDadosUsuario(
+  emailAntigo,
+  emailNovo
+) {
+  if (emailAntigo === emailNovo) {
+    return;
+  }
+
+  const dados =
+    buscarTodosDadosUsuarios();
+
+  if (!dados[emailAntigo]) {
+    return;
+  }
+
+  dados[emailNovo] =
+    dados[emailAntigo];
+
+  delete dados[emailAntigo];
 
   localStorage.setItem(
     STORAGE_KEYS.dados,

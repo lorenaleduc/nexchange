@@ -234,10 +234,13 @@ function atualizarUsuarioComum(
   const usuarios =
     buscarUsuarios();
 
+  const emailAntigo =
+    usuarioAtual.email;
+
   const emailJaExiste =
     usuarios.some(usuario =>
       usuario.email === email &&
-      usuario.email !== usuarioAtual.email
+      usuario.email !== emailAntigo
     );
 
   if (
@@ -255,7 +258,7 @@ function atualizarUsuarioComum(
     usuarios.findIndex(
       usuario =>
         usuario.email ===
-        usuarioAtual.email
+        emailAntigo
     );
 
   if (indice === -1) {
@@ -282,6 +285,11 @@ function atualizarUsuarioComum(
 
   salvarUsuarios(
     usuarios
+  );
+
+  alterarEmailDadosUsuario(
+    emailAntigo,
+    email
   );
 
   salvarSessao(
