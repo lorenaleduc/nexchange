@@ -5,27 +5,42 @@ const ADMIN = {
   role: 'admin'
 };
 
+
 function buscarUsuarioPorEmail(email) {
   if (email === ADMIN.email) {
     return ADMIN;
   }
 
-  const usuarios = buscarUsuarios();
+  const usuarios =
+    buscarUsuarios();
 
-  return usuarios.find(usuario => usuario.email === email);
+  return usuarios.find(
+    usuario =>
+      usuario.email === email
+  );
 }
 
-function cadastrarUsuario(nome, email, senha) {
-  const usuarios = buscarUsuarios();
+
+function cadastrarUsuario(
+  nome,
+  email,
+  senha
+) {
+  const usuarios =
+    buscarUsuarios();
 
   const emailJaExiste =
     email === ADMIN.email ||
-    usuarios.some(usuario => usuario.email === email);
+    usuarios.some(
+      usuario =>
+        usuario.email === email
+    );
 
   if (emailJaExiste) {
     return {
       sucesso: false,
-      mensagem: 'Já existe uma conta com este e-mail.'
+      mensagem:
+        'Já existe uma conta com este e-mail.'
     };
   }
 
@@ -37,8 +52,13 @@ function cadastrarUsuario(nome, email, senha) {
     role: 'user'
   };
 
-  usuarios.push(novoUsuario);
-  salvarUsuarios(usuarios);
+  usuarios.push(
+    novoUsuario
+  );
+
+  salvarUsuarios(
+    usuarios
+  );
 
   return {
     sucesso: true,
@@ -46,17 +66,30 @@ function cadastrarUsuario(nome, email, senha) {
   };
 }
 
-function fazerLogin(email, senha) {
-  const usuario = buscarUsuarioPorEmail(email);
 
-  if (!usuario || usuario.password !== senha) {
+function fazerLogin(
+  email,
+  senha
+) {
+  const usuario =
+    buscarUsuarioPorEmail(
+      email
+    );
+
+  if (
+    !usuario ||
+    usuario.password !== senha
+  ) {
     return {
       sucesso: false,
-      mensagem: 'E-mail ou senha incorretos.'
+      mensagem:
+        'E-mail ou senha incorretos.'
     };
   }
 
-  salvarSessao(usuario.email);
+  salvarSessao(
+    usuario.email
+  );
 
   return {
     sucesso: true,
@@ -64,52 +97,107 @@ function fazerLogin(email, senha) {
   };
 }
 
+
 function verificarSessao() {
-  const email = buscarSessao();
+  const email =
+    buscarSessao();
 
   if (!email) {
     return null;
   }
 
-  return buscarUsuarioPorEmail(email);
+  return buscarUsuarioPorEmail(
+    email
+  );
 }
 
-function mostrarMensagemAuth(mensagem, erro = true) {
-  const elemento = document.getElementById('auth-message');
+
+function mostrarMensagemAuth(
+  mensagem,
+  erro = true
+) {
+  const elemento =
+    document.getElementById(
+      'auth-message'
+    );
 
   if (!elemento) {
     return;
   }
 
-  elemento.textContent = mensagem;
-  elemento.classList.toggle('error', erro);
-  elemento.classList.toggle('success', !erro);
+  elemento.textContent =
+    mensagem;
+
+  elemento.classList.toggle(
+    'error',
+    erro
+  );
+
+  elemento.classList.toggle(
+    'success',
+    !erro
+  );
 }
+
 
 function abrirAuth(tipo) {
-  const modal = document.getElementById('auth-modal');
+  const modal =
+    document.getElementById(
+      'auth-modal'
+    );
 
-  modal.classList.remove('hidden');
+  if (!modal) {
+    return;
+  }
 
-  trocarAbaAuth(tipo);
+  modal.classList.remove(
+    'hidden'
+  );
+
+  trocarAbaAuth(
+    tipo
+  );
 }
 
+
 function fecharAuth() {
-  document
-    .getElementById('auth-modal')
-    .classList.add('hidden');
+  const modal =
+    document.getElementById(
+      'auth-modal'
+    );
+
+  if (!modal) {
+    return;
+  }
+
+  modal.classList.add(
+    'hidden'
+  );
 
   mostrarMensagemAuth('');
 }
 
+
 function trocarAbaAuth(tipo) {
   const formularioLogin =
-    document.getElementById('login-form');
+    document.getElementById(
+      'login-form'
+    );
 
   const formularioCadastro =
-    document.getElementById('register-form');
+    document.getElementById(
+      'register-form'
+    );
 
-  const loginAtivo = tipo === 'login';
+  if (
+    !formularioLogin ||
+    !formularioCadastro
+  ) {
+    return;
+  }
+
+  const loginAtivo =
+    tipo === 'login';
 
   formularioLogin.classList.toggle(
     'hidden',
@@ -122,7 +210,9 @@ function trocarAbaAuth(tipo) {
   );
 
   document
-    .querySelectorAll('[data-auth-tab]')
+    .querySelectorAll(
+      '[data-auth-tab]'
+    )
     .forEach(botao => {
       botao.classList.toggle(
         'active',
@@ -133,100 +223,187 @@ function trocarAbaAuth(tipo) {
   mostrarMensagemAuth('');
 }
 
+
 function enviarLogin(event) {
   event.preventDefault();
 
-  const email = document
-    .getElementById('login-email')
-    .value
-    .trim()
-    .toLowerCase();
+  const email =
+    document
+      .getElementById(
+        'login-email'
+      )
+      .value
+      .trim()
+      .toLowerCase();
 
-  const senha = document
-    .getElementById('login-password')
-    .value;
+  const senha =
+    document
+      .getElementById(
+        'login-password'
+      )
+      .value;
 
-  const resultado = fazerLogin(email, senha);
+  const resultado =
+    fazerLogin(
+      email,
+      senha
+    );
 
   if (!resultado.sucesso) {
-    mostrarMensagemAuth(resultado.mensagem);
+    mostrarMensagemAuth(
+      resultado.mensagem
+    );
+
     return;
   }
 
-  window.location.href = 'pages/dashboard.html';
+  window.location.href =
+    'pages/dashboard.html';
 }
+
 
 function enviarCadastro(event) {
   event.preventDefault();
 
-  const nome = document
-    .getElementById('register-name')
-    .value
-    .trim();
+  const nome =
+    document
+      .getElementById(
+        'register-name'
+      )
+      .value
+      .trim();
 
-  const email = document
-    .getElementById('register-email')
-    .value
-    .trim()
-    .toLowerCase();
+  const email =
+    document
+      .getElementById(
+        'register-email'
+      )
+      .value
+      .trim()
+      .toLowerCase();
 
-  const senha = document
-    .getElementById('register-password')
-    .value;
+  const senha =
+    document
+      .getElementById(
+        'register-password'
+      )
+      .value;
 
-  if (!nome || !email || !senha) {
+  if (
+    !nome ||
+    !email ||
+    !senha
+  ) {
     mostrarMensagemAuth(
       'Preencha todos os campos.'
     );
+
     return;
   }
 
   const resultado =
-    cadastrarUsuario(nome, email, senha);
+    cadastrarUsuario(
+      nome,
+      email,
+      senha
+    );
 
   if (!resultado.sucesso) {
-    mostrarMensagemAuth(resultado.mensagem);
+    mostrarMensagemAuth(
+      resultado.mensagem
+    );
+
     return;
   }
 
-  salvarSessao(resultado.usuario.email);
+  salvarSessao(
+    resultado.usuario.email
+  );
 
-  window.location.href = 'pages/dashboard.html';
+  window.location.href =
+    'pages/dashboard.html';
 }
+
 
 function iniciarAutenticacao() {
   const botaoEntrar =
-    document.getElementById('open-login');
+    document.getElementById(
+      'open-login'
+    );
 
   const botaoHeroLogin =
-    document.getElementById('hero-login');
+    document.getElementById(
+      'hero-login'
+    );
 
   const botaoCadastro =
-    document.getElementById('hero-register');
+    document.getElementById(
+      'hero-register'
+    );
 
   const botaoFechar =
-    document.getElementById('close-auth');
+    document.getElementById(
+      'close-auth'
+    );
 
   const formularioLogin =
-    document.getElementById('login-form');
+    document.getElementById(
+      'login-form'
+    );
 
   const formularioCadastro =
-    document.getElementById('register-form');
+    document.getElementById(
+      'register-form'
+    );
 
   const modal =
-    document.getElementById('auth-modal');
+    document.getElementById(
+      'auth-modal'
+    );
 
-  botaoEntrar.addEventListener('click', () => {
-    abrirAuth('login');
-  });
+  /*
+    Se esses elementos não existem,
+    significa que não estamos na página
+    inicial de autenticação.
+  */
+  if (
+    !botaoEntrar ||
+    !botaoHeroLogin ||
+    !botaoCadastro ||
+    !botaoFechar ||
+    !formularioLogin ||
+    !formularioCadastro ||
+    !modal
+  ) {
+    return;
+  }
 
-  botaoHeroLogin.addEventListener('click', () => {
-    abrirAuth('login');
-  });
+  botaoEntrar.addEventListener(
+    'click',
+    () => {
+      abrirAuth(
+        'login'
+      );
+    }
+  );
 
-  botaoCadastro.addEventListener('click', () => {
-    abrirAuth('register');
-  });
+  botaoHeroLogin.addEventListener(
+    'click',
+    () => {
+      abrirAuth(
+        'login'
+      );
+    }
+  );
+
+  botaoCadastro.addEventListener(
+    'click',
+    () => {
+      abrirAuth(
+        'register'
+      );
+    }
+  );
 
   botaoFechar.addEventListener(
     'click',
@@ -244,19 +421,32 @@ function iniciarAutenticacao() {
   );
 
   document
-    .querySelectorAll('[data-auth-tab]')
+    .querySelectorAll(
+      '[data-auth-tab]'
+    )
     .forEach(botao => {
-      botao.addEventListener('click', () => {
-        trocarAbaAuth(botao.dataset.authTab);
-      });
+      botao.addEventListener(
+        'click',
+        () => {
+          trocarAbaAuth(
+            botao.dataset.authTab
+          );
+        }
+      );
     });
 
-  modal.addEventListener('click', event => {
-    if (event.target === modal) {
-      fecharAuth();
+  modal.addEventListener(
+    'click',
+    event => {
+      if (
+        event.target === modal
+      ) {
+        fecharAuth();
+      }
     }
-  });
+  );
 }
+
 
 document.addEventListener(
   'DOMContentLoaded',

@@ -6,14 +6,21 @@ const DADOS_INICIAIS = {
 };
 
 
-let dadosDashboard =
-  carregarDadosDashboard();
+let dadosDashboard = null;
 
 
 function carregarDadosDashboard() {
-  const dadosSalvos =
-    buscarDados();
+  if (
+    !usuarioAtual ||
+    usuarioAtual.role === 'admin'
+  ) {
+    return null;
+  }
 
+  const dadosSalvos =
+    buscarDadosUsuario(
+      usuarioAtual.email
+    );
 
   if (!dadosSalvos) {
     const novosDados = {
@@ -28,12 +35,13 @@ function carregarDadosDashboard() {
       history: []
     };
 
-
-    salvarDados(novosDados);
+    salvarDadosUsuario(
+      usuarioAtual.email,
+      novosDados
+    );
 
     return novosDados;
   }
-
 
   return dadosSalvos;
 }
@@ -52,16 +60,21 @@ function formatarDinheiro(valor) {
 
 function mostrarToast(mensagem) {
   const toast =
-    document.getElementById('toast');
+    document.getElementById(
+      'toast'
+    );
 
+  toast.textContent =
+    mensagem;
 
-  toast.textContent = mensagem;
-
-  toast.classList.add('show');
-
+  toast.classList.add(
+    'show'
+  );
 
   setTimeout(() => {
-    toast.classList.remove('show');
+    toast.classList.remove(
+      'show'
+    );
   }, 2700);
 }
 
@@ -71,22 +84,42 @@ function adicionarHistorico(
   acao,
   detalhe
 ) {
+  if (!dadosDashboard) {
+    return;
+  }
+
   dadosDashboard.history.unshift({
     date:
       new Date().toLocaleString(
         'pt-BR'
       ),
 
-    asset: ativo,
+    asset:
+      ativo,
 
-    action: acao,
+    action:
+      acao,
 
-    detail: detalhe
+    detail:
+      detalhe
   });
 }
 
 
 function renderizarResumo() {
+  if (!dadosDashboard) {
+    return;
+  }
+
+  const saldo =
+    document.getElementById(
+      'saldo'
+    );
+
+  if (!saldo) {
+    return;
+  }
+
   const reservado =
     dadosDashboard.rules.reduce(
       (total, regra) =>
@@ -94,20 +127,17 @@ function renderizarResumo() {
       0
     );
 
-
-  document.getElementById(
-    'saldo'
-  ).textContent =
+  saldo.textContent =
     formatarDinheiro(
       dadosDashboard.balance
     );
 
-
   document.getElementById(
     'reservado'
   ).textContent =
-    formatarDinheiro(reservado);
-
+    formatarDinheiro(
+      reservado
+    );
 
   document.getElementById(
     'regras-resumo'
@@ -116,22 +146,18 @@ function renderizarResumo() {
       ? `${dadosDashboard.rules.length} regra(s) configurada(s)`
       : 'Nenhuma regra ativa';
 
-
   const automacao =
     document.getElementById(
       'automacao'
     );
-
 
   const status =
     document.getElementById(
       'automacao-status'
     );
 
-
   automacao.checked =
     dadosDashboard.automation;
-
 
   status.textContent =
     dadosDashboard.automation
@@ -141,11 +167,18 @@ function renderizarResumo() {
 
 
 function renderizarHistorico() {
+  if (!dadosDashboard) {
+    return;
+  }
+
   const tabela =
     document.getElementById(
       'historico-corpo'
     );
 
+  if (!tabela) {
+    return;
+  }
 
   if (
     dadosDashboard.history.length === 0
@@ -160,7 +193,6 @@ function renderizarHistorico() {
 
     return;
   }
-
 
   tabela.innerHTML =
     dadosDashboard.history.map(
@@ -177,6 +209,15 @@ function renderizarHistorico() {
 
 
 function renderizarDashboard() {
+  if (
+    usuarioAtual.role === 'admin'
+  ) {
+    renderizarAtivosAdmin();
+    renderizarResumoAdmin();
+
+    return;
+  }
+
   renderizarResumo();
 
   renderizarRegras();
@@ -186,9 +227,12 @@ function renderizarDashboard() {
 
 
 function alterarAutomacao(event) {
+  if (!dadosDashboard) {
+    return;
+  }
+
   dadosDashboard.automation =
     event.target.checked;
-
 
   adicionarHistorico(
     'Automação',
@@ -200,11 +244,12 @@ function alterarAutomacao(event) {
     'Alteração de configuração'
   );
 
-
-  salvarDados(dadosDashboard);
+  salvarDadosUsuario(
+    usuarioAtual.email,
+    dadosDashboard
+  );
 
   renderizarDashboard();
-
 
   mostrarToast(
     dadosDashboard.automation
@@ -215,13 +260,18 @@ function alterarAutomacao(event) {
 
 
 function limparHistorico() {
+  if (!dadosDashboard) {
+    return;
+  }
+
   dadosDashboard.history = [];
 
-
-  salvarDados(dadosDashboard);
+  salvarDadosUsuario(
+    usuarioAtual.email,
+    dadosDashboard
+  );
 
   renderizarHistorico();
-
 
   mostrarToast(
     'Histórico limpo.'
@@ -232,13 +282,12 @@ function limparHistorico() {
 function sairDaConta() {
   removerSessao();
 
-
   window.location.href =
     '../index.html';
 }
 
 
-function adicionarEventos() {
+function adicionarEventosComuns() {
   document
     .getElementById(
       'edit-profile-button'
@@ -247,7 +296,6 @@ function adicionarEventos() {
       'click',
       abrirModalPerfil
     );
-
 
   document
     .getElementById(
@@ -258,7 +306,6 @@ function adicionarEventos() {
       fecharModalPerfil
     );
 
-
   document
     .getElementById(
       'profile-form'
@@ -268,7 +315,6 @@ function adicionarEventos() {
       atualizarPerfil
     );
 
-
   document
     .getElementById(
       'logout-button'
@@ -277,8 +323,10 @@ function adicionarEventos() {
       'click',
       sairDaConta
     );
+}
 
 
+function adicionarEventosInvestidor() {
   document
     .getElementById(
       'form-regra'
@@ -287,7 +335,6 @@ function adicionarEventos() {
       'submit',
       salvarRegra
     );
-
 
   document
     .getElementById(
@@ -298,7 +345,6 @@ function adicionarEventos() {
       limparFormularioRegra
     );
 
-
   document
     .getElementById(
       'lista-regras'
@@ -307,37 +353,6 @@ function adicionarEventos() {
       'click',
       controlarCliqueRegra
     );
-
-
-  document
-    .getElementById(
-      'asset-form'
-    )
-    .addEventListener(
-      'submit',
-      salvarFormularioAtivo
-    );
-
-
-  document
-    .getElementById(
-      'asset-cancel'
-    )
-    .addEventListener(
-      'click',
-      limparFormularioAtivo
-    );
-
-
-  document
-    .getElementById(
-      'admin-assets-list'
-    )
-    .addEventListener(
-      'click',
-      controlarCliqueAtivo
-    );
-
 
   document
     .getElementById(
@@ -348,7 +363,6 @@ function adicionarEventos() {
       atualizarPrecoAtual
     );
 
-
   document
     .getElementById(
       'automacao'
@@ -358,7 +372,6 @@ function adicionarEventos() {
       alterarAutomacao
     );
 
-
   document
     .getElementById(
       'limpar-historico'
@@ -367,35 +380,35 @@ function adicionarEventos() {
       'click',
       limparHistorico
     );
+}
 
 
+function adicionarEventosAdministrador() {
   document
     .getElementById(
-      'admin-users-list'
-    )
-    .addEventListener(
-      'click',
-      controlarCliqueUsuario
-    );
-
-
-  document
-    .getElementById(
-      'admin-user-form'
+      'asset-form'
     )
     .addEventListener(
       'submit',
-      salvarEdicaoUsuario
+      salvarFormularioAtivo
     );
-
 
   document
     .getElementById(
-      'close-admin-user-modal'
+      'asset-cancel'
     )
     .addEventListener(
       'click',
-      fecharEdicaoUsuario
+      limparFormularioAtivo
+    );
+
+  document
+    .getElementById(
+      'admin-assets-list'
+    )
+    .addEventListener(
+      'click',
+      controlarCliqueAtivo
     );
 }
 
@@ -404,25 +417,34 @@ function iniciarDashboard() {
   const usuario =
     carregarUsuarioAtual();
 
-
   if (!usuario) {
     return;
   }
-
 
   carregarAtivos();
 
   atualizarInformacoesUsuario();
 
+  dadosDashboard =
+    carregarDadosDashboard();
+
+  if (
+    usuario.role === 'admin'
+  ) {
+    renderizarDashboard();
+
+    adicionarEventosComuns();
+
+    adicionarEventosAdministrador();
+
+    return;
+  }
+
   renderizarAtivos();
 
   renderizarDashboard();
 
-  adicionarEventos();
+  adicionarEventosComuns();
+
+  adicionarEventosInvestidor();
 }
-
-
-document.addEventListener(
-  'DOMContentLoaded',
-  iniciarDashboard
-);

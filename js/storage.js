@@ -1,13 +1,26 @@
 const STORAGE_KEYS = {
-  usuarios: 'nexchange-users',
-  sessao: 'nexchange-session',
-  ativos: 'nexchange-assets',
-  dados: 'nexchange-price-rules'
+  usuarios:
+    'nexchange-users',
+
+  sessao:
+    'nexchange-session',
+
+  ativos:
+    'nexchange-assets',
+
+  dados:
+    'nexchange-user-data'
 };
 
+
 function buscarUsuarios() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEYS.usuarios)) || [];
+  return JSON.parse(
+    localStorage.getItem(
+      STORAGE_KEYS.usuarios
+    )
+  ) || [];
 }
+
 
 function salvarUsuarios(usuarios) {
   localStorage.setItem(
@@ -16,21 +29,37 @@ function salvarUsuarios(usuarios) {
   );
 }
 
+
 function buscarSessao() {
-  return localStorage.getItem(STORAGE_KEYS.sessao);
+  return localStorage.getItem(
+    STORAGE_KEYS.sessao
+  );
 }
+
 
 function salvarSessao(email) {
-  localStorage.setItem(STORAGE_KEYS.sessao, email);
+  localStorage.setItem(
+    STORAGE_KEYS.sessao,
+    email
+  );
 }
+
 
 function removerSessao() {
-  localStorage.removeItem(STORAGE_KEYS.sessao);
+  localStorage.removeItem(
+    STORAGE_KEYS.sessao
+  );
 }
 
+
 function buscarAtivos() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEYS.ativos));
+  return JSON.parse(
+    localStorage.getItem(
+      STORAGE_KEYS.ativos
+    )
+  );
 }
+
 
 function salvarAtivos(ativos) {
   localStorage.setItem(
@@ -39,11 +68,34 @@ function salvarAtivos(ativos) {
   );
 }
 
-function buscarDados() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEYS.dados));
+
+function buscarTodosDadosUsuarios() {
+  return JSON.parse(
+    localStorage.getItem(
+      STORAGE_KEYS.dados
+    )
+  ) || {};
 }
 
-function salvarDados(dados) {
+
+function buscarDadosUsuario(email) {
+  const dados =
+    buscarTodosDadosUsuarios();
+
+  return dados[email] || null;
+}
+
+
+function salvarDadosUsuario(
+  email,
+  dadosUsuario
+) {
+  const dados =
+    buscarTodosDadosUsuarios();
+
+  dados[email] =
+    dadosUsuario;
+
   localStorage.setItem(
     STORAGE_KEYS.dados,
     JSON.stringify(dados)

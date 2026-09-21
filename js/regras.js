@@ -35,7 +35,7 @@ function salvarRegra(event) {
 
   if (valor > dadosDashboard.balance) {
     mostrarToast(
-      'O limite não pode ser maior que o saldo simulado.'
+      'O valor da regra não pode ser maior que o saldo disponível.'
     );
 
     return;
@@ -58,7 +58,10 @@ function salvarRegra(event) {
     );
   }
 
-  salvarDados(dadosDashboard);
+  salvarDadosUsuario(
+  usuarioAtual.email,
+  dadosDashboard
+);
 
   limparFormularioRegra();
   renderizarDashboard();
@@ -209,7 +212,10 @@ function removerRegra(id) {
     'Configuração cancelada'
   );
 
-  salvarDados(dadosDashboard);
+  salvarDadosUsuario(
+  usuarioAtual.email,
+  dadosDashboard
+);
 
   const regraEmEdicao = Number(
     document.getElementById('regra-id').value
@@ -253,16 +259,10 @@ function atualizarAtivoNasRegras(
     }
   });
 
-  salvarDados(dadosDashboard);
-}
-
-function removerRegrasDoAtivo(simbolo) {
-  dadosDashboard.rules =
-    dadosDashboard.rules.filter(
-      regra => regra.asset !== simbolo
-    );
-
-  salvarDados(dadosDashboard);
+  salvarDadosUsuario(
+  usuarioAtual.email,
+  dadosDashboard
+);
 }
 
 function renderizarRegras() {
