@@ -9,7 +9,9 @@ function salvarRegra(event) {
     document.getElementById('ativo').value;
 
   const ativo = ativos.find(
-    item => item.symbol === simboloAtivo
+    item =>
+      item.symbol === simboloAtivo &&
+      item.active !== false
   );
 
   const precoAlvo = Number(
@@ -20,6 +22,12 @@ function salvarRegra(event) {
     document.getElementById('valor').value
   );
 
+  const campoMoeda =
+    document.getElementById('moeda');
+
+  const moeda =
+    campoMoeda ? campoMoeda.value : 'BRL';
+
   const notificar =
     document.getElementById('notificar').checked;
 
@@ -28,8 +36,18 @@ function salvarRegra(event) {
     return;
   }
 
-  if (precoAlvo <= 0 || valor <= 0) {
-    mostrarToast('Informe valores válidos.');
+  if (precoAlvo <= 0) {
+    mostrarToast('Informe um preço-alvo válido.');
+    return;
+  }
+
+  if (valor <= 0) {
+    mostrarToast('Informe um valor válido para a regra.');
+    return;
+  }
+
+  if (!moeda) {
+    mostrarToast('Selecione uma moeda.');
     return;
   }
 
@@ -37,7 +55,6 @@ function salvarRegra(event) {
     mostrarToast(
       'O valor da regra não pode ser maior que o saldo disponível.'
     );
-
     return;
   }
 
@@ -47,6 +64,7 @@ function salvarRegra(event) {
       ativo,
       precoAlvo,
       valor,
+      moeda,
       notificar
     );
   } else {
@@ -54,23 +72,26 @@ function salvarRegra(event) {
       ativo,
       precoAlvo,
       valor,
+      moeda,
       notificar
     );
   }
 
   salvarDadosUsuario(
-  usuarioAtual.email,
-  dadosDashboard
-);
+    usuarioAtual.email,
+    dadosDashboard
+  );
 
   limparFormularioRegra();
   renderizarDashboard();
 }
 
+
 function criarRegra(
   ativo,
   precoAlvo,
   valor,
+  moeda,
   notificar
 ) {
   const novaRegra = {
@@ -78,6 +99,7 @@ function criarRegra(
     asset: ativo.symbol,
     target: precoAlvo,
     amount: valor,
+    currency: moeda,
     notify: notificar
   };
 
@@ -94,16 +116,19 @@ function criarRegra(
   );
 }
 
+
 function atualizarRegra(
   id,
   ativo,
   precoAlvo,
   valor,
+  moeda,
   notificar
 ) {
-  const indice = dadosDashboard.rules.findIndex(
-    regra => regra.id === id
-  );
+  const indice =
+    dadosDashboard.rules.findIndex(
+      regra => regra.id === id
+    );
 
   if (indice === -1) {
     mostrarToast('Regra não encontrada.');
@@ -115,6 +140,7 @@ function atualizarRegra(
     asset: ativo.symbol,
     target: precoAlvo,
     amount: valor,
+    currency: moeda,
     notify: notificar
   };
 
@@ -129,10 +155,12 @@ function atualizarRegra(
   );
 }
 
+
 function editarRegra(id) {
-  const regra = dadosDashboard.rules.find(
-    item => item.id === id
-  );
+  const regra =
+    dadosDashboard.rules.find(
+      item => item.id === id
+    );
 
   if (!regra) {
     mostrarToast('Regra não encontrada.');
@@ -150,6 +178,14 @@ function editarRegra(id) {
 
   document.getElementById('valor').value =
     regra.amount;
+
+  const campoMoeda =
+    document.getElementById('moeda');
+
+  if (campoMoeda) {
+    campoMoeda.value =
+      regra.currency || 'BRL';
+  }
 
   document.getElementById('notificar').checked =
     regra.notify;
@@ -172,6 +208,7 @@ function editarRegra(id) {
   });
 }
 
+
 function limparFormularioRegra() {
   document.getElementById(
     'form-regra'
@@ -180,6 +217,13 @@ function limparFormularioRegra() {
   document.getElementById(
     'regra-id'
   ).value = '';
+
+  const campoMoeda =
+    document.getElementById('moeda');
+
+  if (campoMoeda) {
+    campoMoeda.value = 'BRL';
+  }
 
   document.getElementById(
     'regra-submit'
@@ -192,10 +236,12 @@ function limparFormularioRegra() {
   atualizarPrecoAtual();
 }
 
+
 function removerRegra(id) {
-  const regra = dadosDashboard.rules.find(
-    item => item.id === id
-  );
+  const regra =
+    dadosDashboard.rules.find(
+      item => item.id === id
+    );
 
   if (!regra) {
     return;
@@ -213,9 +259,9 @@ function removerRegra(id) {
   );
 
   salvarDadosUsuario(
-  usuarioAtual.email,
-  dadosDashboard
-);
+    usuarioAtual.email,
+    dadosDashboard
+  );
 
   const regraEmEdicao = Number(
     document.getElementById('regra-id').value
@@ -229,6 +275,7 @@ function removerRegra(id) {
 
   mostrarToast('Regra removida.');
 }
+
 
 function controlarCliqueRegra(event) {
   const idEditar = Number(
@@ -249,6 +296,7 @@ function controlarCliqueRegra(event) {
   }
 }
 
+
 function atualizarAtivoNasRegras(
   simboloAnterior,
   novoSimbolo
@@ -260,10 +308,11 @@ function atualizarAtivoNasRegras(
   });
 
   salvarDadosUsuario(
-  usuarioAtual.email,
-  dadosDashboard
-);
+    usuarioAtual.email,
+    dadosDashboard
+  );
 }
+
 
 function renderizarRegras() {
   const lista =
@@ -320,17 +369,31 @@ function renderizarRegras() {
 
         <div class="target">
           <span>Se chegar a</span>
-          <strong>${formatarDinheiro(regra.target)}</strong>
+          <strong>
+            ${formatarDinheiro(regra.target)}
+          </strong>
         </div>
 
         <div class="rule-meta">
+
           <span class="rule-limit">
-            Limite: ${formatarDinheiro(regra.amount)}
+            Valor: ${formatarDinheiro(regra.amount)}
           </span>
 
-          <span class="notify-badge ${regra.notify ? 'on' : ''}">
-            ${regra.notify ? 'Notificação ativada' : 'Sem notificação'}
+          <span class="rule-limit">
+            Moeda: ${regra.currency || 'BRL'}
           </span>
+
+          <span
+            class="notify-badge ${regra.notify ? 'on' : ''}"
+          >
+            ${
+              regra.notify
+                ? 'Notificação ativada'
+                : 'Sem notificação'
+            }
+          </span>
+
         </div>
 
       </div>

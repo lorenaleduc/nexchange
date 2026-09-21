@@ -57,7 +57,7 @@
 
       <div class="form-group">
         <label for="valor">
-          Valor limite
+          Valor da regra
         </label>
 
         <input
@@ -68,6 +68,29 @@
           placeholder="0,00"
           required
         >
+      </div>
+
+      <div class="form-group">
+        <label for="moeda">
+          Moeda
+        </label>
+
+        <select
+          id="moeda"
+          required
+        >
+          <option value="BRL" selected>
+            BRL - Real brasileiro
+          </option>
+
+          <option value="USD">
+            USD - Dólar americano
+          </option>
+
+          <option value="EUR">
+            EUR - Euro
+          </option>
+        </select>
       </div>
 
       <label class="checkbox-field">
